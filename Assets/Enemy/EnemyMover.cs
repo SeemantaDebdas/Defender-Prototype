@@ -4,21 +4,40 @@ using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] List<Waypoint> waypoints;
+    [SerializeField] List<Waypoint> waypoints = new List<Waypoint>();
 
     private void Start()
     {
-        if(waypoints != null)
-            StartCoroutine(FollowPath());
+        StartCoroutine(FollowPath());
     }
 
     IEnumerator FollowPath()
     {
         foreach (var waypoint in waypoints)
         {
-            transform.position = waypoint.transform.position;
-            //transform.position = new Vector3(waypoint.transform.position.x, transform.position.y, waypoint.transform.position.z);
-            yield return new WaitForSeconds(1f);
+            Vector3 startPostion = transform.position;
+            Vector3 endPosition = waypoint.transform.position;
+
+            //Quaternion startRotation = transform.rotation;
+            //Quaternion endRotation = Quaternion.LookRotation(transform.position, waypoint.transform.position);
+
+            //float rotatePercent = 0f;
+            //while (rotatePercent < 1f)
+            //{
+            //    rotatePercent += Time.deltaTime;
+            //    transform.rotation = Quaternion.Lerp(startRotation, endRotation, rotatePercent);
+            //}
+            
+
+            float travelPercent = 0f;
+
+            while (travelPercent < 1f)
+            {
+                travelPercent += Time.deltaTime;
+                Debug.Log(travelPercent);
+                transform.position = Vector3.Lerp(startPostion, endPosition, travelPercent);
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 }
