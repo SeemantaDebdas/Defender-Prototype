@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] List<Waypoint> waypoints = new List<Waypoint>();
+    [SerializeField] float rotationSpeed = 0.1f;
+    [SerializeField] float moveSpeed = 5f;
 
     private void Start()
     {
@@ -18,23 +20,35 @@ public class EnemyMover : MonoBehaviour
             Vector3 startPostion = transform.position;
             Vector3 endPosition = waypoint.transform.position;
 
-            //Quaternion startRotation = transform.rotation;
-            //Quaternion endRotation = Quaternion.LookRotation(transform.position, waypoint.transform.position);
+            Quaternion startRotation = transform.rotation;
+            Quaternion endRotation = Quaternion.LookRotation(waypoint.transform.position - transform.position);
 
             //float rotatePercent = 0f;
             //while (rotatePercent < 1f)
             //{
-            //    rotatePercent += Time.deltaTime;
+            //    rotatePercent += Time.deltaTime * rotationSpeed;
             //    transform.rotation = Quaternion.Lerp(startRotation, endRotation, rotatePercent);
+            //    yield return new WaitForEndOfFrame();
             //}
-            
+
+            //float travelPercent = 0f;
+
+            //while (travelPercent < 1f)
+            //{
+            //    travelPercent += Time.deltaTime * moveSpeed;
+            //    transform.position = Vector3.Lerp(startPostion, endPosition, travelPercent);
+            //    yield return new WaitForEndOfFrame();
+            //}
 
             float travelPercent = 0f;
+            float rotatePercent = 0f;
 
-            while (travelPercent < 1f)
+            while (travelPercent < 1f || rotatePercent < 1f)
             {
-                travelPercent += Time.deltaTime;
-                Debug.Log(travelPercent);
+                travelPercent += Time.deltaTime * moveSpeed;
+                rotatePercent += Time.deltaTime * rotationSpeed;
+
+                transform.rotation = Quaternion.Lerp(startRotation, endRotation, rotatePercent);
                 transform.position = Vector3.Lerp(startPostion, endPosition, travelPercent);
                 yield return new WaitForEndOfFrame();
             }
