@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4563596899749891654}
   - component: {fileID: 7188367565734285661}
   - component: {fileID: -9180182347720015569}
+  - component: {fileID: 7885742713206153820}
   - component: {fileID: 3066058690387140844}
   m_Layer: 0
   m_Name: Ram
@@ -47,8 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  rotationSpeed: 1.5
-  moveSpeed: 1.5
+  rotationSpeed: 5
+  moveSpeed: 1
 --- !u!114 &-9180182347720015569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +64,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHitPoints: 5
   currentHitPoints: 0
+--- !u!114 &7885742713206153820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755711401832404220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4a68b86e655e24c8868f855637d0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &3066058690387140844
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -865,7 +865,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5013,6 +5013,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 7523635796520195304}
-  enemy: {fileID: 0}
-  rotationSpeed: 5
+  rotationSpeed: 360
   targetOffset: {x: 0, y: 3, z: 0}
+  weaponRange: 20

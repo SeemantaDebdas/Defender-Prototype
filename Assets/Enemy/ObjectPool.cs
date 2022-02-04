@@ -32,12 +32,20 @@ public class ObjectPool : MonoBehaviour
     {
         while (true)
         {
-            for(int i= 0; i < poolSize; i++)
+            EnableObjectInPool();
+            yield return new WaitForSeconds(spawnTime);
+        }
+    }
+
+    private void EnableObjectInPool()
+    {
+        for (int i = 0; i < poolSize; i++)
+        {
+            if (!pool[i].activeInHierarchy)
             {
-                if(!pool[i].activeInHierarchy)
-                    pool[i].SetActive(true);
-                yield return new WaitForSeconds(spawnTime);
-            }  
+                pool[i].SetActive(true);
+                return;
+            } 
         }
     }
 }
