@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  rotationSpeed: 0.1
-  moveSpeed: 5
+  rotationSpeed: 1.5
+  moveSpeed: 1.5
 --- !u!114 &-9180182347720015569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cff57925efe138499d844e2ca96bdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHitPoints: 5
+  currentHitPoints: 0
 --- !u!65 &3066058690387140844
 BoxCollider:
   m_ObjectHideFlags: 0

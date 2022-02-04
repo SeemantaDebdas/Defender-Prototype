@@ -8,9 +8,23 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] float rotationSpeed = 0.1f;
     [SerializeField] float moveSpeed = 5f;
 
-    private void Start()
+    private void OnEnable()
     {
+        FindPath();
+        MoveToStart();
         StartCoroutine(FollowPath());
+    }
+
+    void FindPath()
+    {
+        //clear existing path before adding new path
+        waypoints.Clear();
+
+        GameObject waypointParent = GameObject.FindGameObjectWithTag("Path");
+        foreach (Transform waypoint in waypointParent.transform)
+        {
+            waypoints.Add(waypoint.GetComponent<Waypoint>());
+        }
     }
 
     IEnumerator FollowPath()
@@ -22,23 +36,6 @@ public class EnemyMover : MonoBehaviour
 
             Quaternion startRotation = transform.rotation;
             Quaternion endRotation = Quaternion.LookRotation(waypoint.transform.position - transform.position);
-
-            //float rotatePercent = 0f;
-            //while (rotatePercent < 1f)
-            //{
-            //    rotatePercent += Time.deltaTime * rotationSpeed;
-            //    transform.rotation = Quaternion.Lerp(startRotation, endRotation, rotatePercent);
-            //    yield return new WaitForEndOfFrame();
-            //}
-
-            //float travelPercent = 0f;
-
-            //while (travelPercent < 1f)
-            //{
-            //    travelPercent += Time.deltaTime * moveSpeed;
-            //    transform.position = Vector3.Lerp(startPostion, endPosition, travelPercent);
-            //    yield return new WaitForEndOfFrame();
-            //}
 
             float travelPercent = 0f;
             float rotatePercent = 0f;
@@ -53,5 +50,29 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+
+        this.gameObject.SetActive(false);
+    }
+
+    void MoveToStart() => transform.position = waypoints[0].transform.position;
+
+    void RotateBeforeMoving()
+    {
+        //float rotatePercent = 0f;
+        //while (rotatePercent < 1f)
+        //{
+        //    rotatePercent += Time.deltaTime * rotationSpeed;
+        //    transform.rotation = Quaternion.Lerp(startRotation, endRotation, rotatePercent);
+        //    yield return new WaitForEndOfFrame();
+        //}
+
+        //float travelPercent = 0f;
+
+        //while (travelPercent < 1f)
+        //{
+        //    travelPercent += Time.deltaTime * moveSpeed;
+        //    transform.position = Vector3.Lerp(startPostion, endPosition, travelPercent);
+        //    yield return new WaitForEndOfFrame();
+        //}
     }
 }
