@@ -14,11 +14,21 @@ public class Bank : MonoBehaviour
         currentAmount = initialAmount;
     }
 
-    public void Deposit(int amount) => currentAmount += Mathf.Abs(amount);
+    private void Start()
+    {
+        UIManager.Instance.SetGoldText(currentAmount.ToString());
+    }
+
+    public void Deposit(int amount)
+    {
+        currentAmount += Mathf.Abs(amount);
+        UIManager.Instance.SetGoldText(currentAmount.ToString());
+    }
 
     public void Withdraw(int amount)
     {
         currentAmount -= Mathf.Abs(amount);
+        UIManager.Instance.SetGoldText(currentAmount.ToString());
         if (currentAmount <= 0)
             print("You lost!");
     }
